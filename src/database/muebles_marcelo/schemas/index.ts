@@ -1,6 +1,9 @@
+import { RolesModel } from './roles.model';
 import { UsersModel } from './users.model';
 
 
 export const Models = [
-  UsersModel
+  UsersModel,
+  RolesModel,
 ];
+
