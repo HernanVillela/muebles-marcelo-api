@@ -39,7 +39,7 @@ export class UsersModel extends Model {
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
-    defaultValue: 0
+    defaultValue: true
   })
   active: number;
 
