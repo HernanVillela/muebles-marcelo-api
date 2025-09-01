@@ -12,6 +12,11 @@ export class GetUsers {
     @IsNumber()
     @IsOptional()
     role_id?: number
+
+    @IsString()
+    @IsEmail()
+    @IsOptional()
+    email?: string
 }
 
 export class CreateUsers {
