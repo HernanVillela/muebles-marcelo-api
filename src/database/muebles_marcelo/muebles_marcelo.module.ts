@@ -20,14 +20,7 @@ import { Models } from './schemas';
           database: dbConfig.name,
           autoLoadModels: true,
           synchronize: true,
-          logging: false,
-          // define: dbConfig.schema ? { schema: dbConfig.schema } : undefined,
-          // pool: {
-          //   max: 20, // Maximum number of connections in pool
-          //   min: 5,  // Minimum number of connections in pool
-          //   acquire: 30000, // The maximum time, in milliseconds, that pool will try to get connection before throwing error
-          //   idle: 10000 // The maximum time, in milliseconds, that a connection can be idle before being released
-          // },
+          logging: false
         };
       },
     }),
