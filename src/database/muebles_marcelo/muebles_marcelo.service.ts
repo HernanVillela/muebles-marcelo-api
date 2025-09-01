@@ -3,6 +3,7 @@ import { UsersModel } from './schemas/users.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { UpdateUsers } from 'src/routes/admin/dto/users.dto';
 import { RolesModel } from './schemas/roles.model';
+import { UpdateRoles } from 'src/routes/admin/dto/roles.dto';
 
 @Injectable()
 export class MueblesMarceloService {
@@ -14,7 +15,7 @@ export class MueblesMarceloService {
         private readonly rolesModel: typeof RolesModel
     ){}
 
-    async getUsers(params) {
+    async getUsers(params) : Promise<UsersModel[]> {
         let where : any = {}
 
         for(let index in params) {
@@ -23,16 +24,14 @@ export class MueblesMarceloService {
             }
         }
 
-        const response = await this.usersModel.findAll({where});
-        return response;
+        return await this.usersModel.findAll({where, raw: true})
     }
 
-    async createUsers(params) {
-        const response = await this.usersModel.create(params);
-        return response;
+    async createUsers(params) : Promise<UsersModel> {
+        return await this.usersModel.create(params)
     }
 
-    async updateUsers(user_id: number, params: UpdateUsers) {
+    async updateUsers(user_id: number, params: UpdateUsers) : Promise<number[]> {
         const response = await this.usersModel.update(params, {
             where: { id: user_id },
         });
@@ -42,7 +41,7 @@ export class MueblesMarceloService {
 
 
 
-    async getRoles(params) {
+    async getRoles(params) : Promise<RolesModel[]> {
         let where : any = {}
 
         for(let index in params) {
@@ -51,16 +50,14 @@ export class MueblesMarceloService {
             }
         }
 
-        const response = await this.rolesModel.findAll({where});
-        return response;
+        return await this.rolesModel.findAll({where, raw: true})
     }
 
-    async createRoles(params) {
-        const response = await this.rolesModel.create(params);
-        return response;
+    async createRoles(params) : Promise<RolesModel> {
+        return await this.rolesModel.create(params)
     }
 
-    async updateRoles(user_id: number, params: UpdateUsers) {
+    async updateRoles(user_id: number, params: UpdateRoles) : Promise<number[]> {
         const response = await this.rolesModel.update(params, {
             where: { id: user_id },
         });
