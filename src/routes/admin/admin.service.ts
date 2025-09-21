@@ -2,6 +2,7 @@ import { ConflictException, Injectable, InternalServerErrorException, NotFoundEx
 import { GetUsers, UpdateUsers } from './dto/users.dto';
 import { MueblesMarceloService } from 'src/database/muebles_marcelo/muebles_marcelo.service';
 import { GetRoles, UpdateRoles } from './dto/roles.dto';
+import { CreateMaterials, GetMaterials, UpdateMaterials } from './dto/materials.dto';
 
 @Injectable()
 export class AdminService {
@@ -76,6 +77,43 @@ export class AdminService {
         })
         .catch(err => {
             throw new InternalServerErrorException('Error al actualizar el rol.')
+        })
+    }
+
+
+
+
+
+
+    getMaterials(params: GetMaterials) {
+        return this.mueblesMarceloService.getMaterials(params)
+        .catch(err => {
+            throw new InternalServerErrorException('Error al encontrar el rol.')
+        })
+    }
+
+    async createMaterials(params: CreateMaterials) {
+        let roles = await this.mueblesMarceloService.getMaterials({name: params.name})
+
+        if(roles.length > 0){
+            throw new ConflictException('Error en los datos proporcionados.')
+        }
+
+        return this.mueblesMarceloService.createMaterials(params)
+        .catch(err => {
+            throw new InternalServerErrorException('Error al crear el materiales.')
+        })
+    }
+
+    updateMaterials(user_id: number, params: UpdateMaterials) {
+        return this.mueblesMarceloService.updateMaterials(user_id, params)
+        .then(result => {
+            if(result[0] == 0){
+                throw new NotFoundException('The record could not be updated')
+            }
+        })
+        .catch(err => {
+            throw new InternalServerErrorException('Error al actualizar el material.')
         })
     }
 }

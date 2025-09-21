@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { UpdateUsers } from 'src/routes/admin/dto/users.dto';
 import { RolesModel } from './schemas/roles.model';
 import { UpdateRoles } from 'src/routes/admin/dto/roles.dto';
+import { MaterialsModel } from './schemas/materials.model';
 
 @Injectable()
 export class MueblesMarceloService {
@@ -12,7 +13,10 @@ export class MueblesMarceloService {
         private readonly usersModel: typeof UsersModel,
 
         @InjectModel(RolesModel,'muebles_marcelo')
-        private readonly rolesModel: typeof RolesModel
+        private readonly rolesModel: typeof RolesModel,
+
+        @InjectModel(MaterialsModel,'muebles_marcelo')
+        private readonly materialsModel: typeof MaterialsModel
     ){}
 
     async getUsers(params) : Promise<UsersModel[]> {
@@ -64,4 +68,30 @@ export class MueblesMarceloService {
         return response;
     }
 
+
+
+
+
+    async getMaterials(params) : Promise<MaterialsModel[]> {
+        let where : any = {}
+
+        for(let index in params) {
+            if(params[index]){
+                where[index] = params[index]
+            }
+        }
+
+        return await this.materialsModel.findAll({where, raw: true})
+    }
+
+    async createMaterials(params) : Promise<MaterialsModel> {
+        return await this.materialsModel.create(params)
+    }
+
+    async updateMaterials(user_id: number, params: UpdateRoles) : Promise<number[]> {
+        const response = await this.materialsModel.update(params, {
+            where: { id: user_id },
+        });
+        return response;
+    }
 }

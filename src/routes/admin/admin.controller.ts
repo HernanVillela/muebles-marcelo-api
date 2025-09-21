@@ -2,6 +2,7 @@ import { Body, Controller, Get, Param, Patch, Post, Query } from '@nestjs/common
 import { AdminService } from './admin.service';
 import { CreateUsers, GetUsers, UpdateUsers } from './dto/users.dto';
 import { CreateRoles, GetRoles, UpdateRoles } from './dto/roles.dto';
+import { GetMaterials, UpdateMaterials } from './dto/materials.dto';
 
 @Controller('admin')
 export class AdminController {
@@ -39,6 +40,21 @@ export class AdminController {
   @Patch(':id/updateRoles')
   updateRoles(@Param() role, @Body() params: UpdateRoles) {
     return this.adminService.updateRoles(role.id, params);
+  }
+
+  @Get('getMaterials')
+  getMaterials(@Query() params: GetMaterials) {
+    return this.adminService.getMaterials(params);
+  }
+
+  @Post('createMaterials')
+  createMaterials(@Body() params: GetMaterials) {
+    return this.adminService.createMaterials(params);
+  }
+
+  @Patch(':id/updateMaterials')
+  updateMaterials(@Param() role, @Body() params: UpdateMaterials) {
+    return this.adminService.updateMaterials(role.id, params);
   }
 
 }
