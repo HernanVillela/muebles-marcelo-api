@@ -37,11 +37,11 @@ export class UsersModel extends Model {
   password: string;
 
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.BOOLEAN,
     allowNull: false,
     defaultValue: true
   })
-  active: number;
+  active: boolean;
 
   @Column({
     type: DataType.INTEGER,
