@@ -9,10 +9,6 @@ export class GetUsers {
     @IsOptional()
     name?: string
 
-    @IsNumber()
-    @IsOptional()
-    role_id?: number
-
     @IsString()
     @IsEmail()
     @IsOptional()
@@ -36,10 +32,6 @@ export class CreateUsers {
     @IsNotEmpty()
     @IsString()
     password: string
-
-    @IsNumber()
-    @IsNotEmpty()
-    role_id: number
 }
 
 export class UpdateUsers {
@@ -63,8 +55,4 @@ export class UpdateUsers {
     @IsString()
     @IsOptional()
     password?: string
-
-    @IsNumber()
-    @IsOptional()
-    role_id?: number
 }

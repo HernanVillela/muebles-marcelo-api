@@ -21,10 +21,10 @@ export class AdminService {
 
         // validacion de nombre de usuario
         let userName = await this.mueblesMarceloService.getUsers({name: params.name})
-        let userRole = await this.mueblesMarceloService.getRoles({id: params.role_id})
+        // let userRole = await this.mueblesMarceloService.getRoles({id: params.role_id})
         let userEmail = await this.mueblesMarceloService.getUsers({email: params.email})
 
-        if(userName.length > 0 || userEmail.length > 0 || userRole.length == 0){
+        if(userName.length > 0 || userEmail.length > 0/* || userRole.length == 0*/){
             throw new ConflictException('Error en los datos proporcionados.')
         }
 
