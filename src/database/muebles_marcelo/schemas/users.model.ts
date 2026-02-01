@@ -42,10 +42,4 @@ export class UsersModel extends Model {
     defaultValue: true
   })
   active: boolean;
-
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: false,
-  })
-  role_id: number;
 }
