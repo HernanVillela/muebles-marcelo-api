@@ -10,22 +10,25 @@ export class AdminController {
     private readonly adminService: AdminService
   ) {}
 
-  @Get('getUsers')
+  @Get('/users')
   getUsers(@Query() params: GetUsers) {
     return this.adminService.getUsers(params);
   }
 
-  @Post('createUsers')
+  @Post('/users')
   createUsers(@Body() params: CreateUsers) {
     return this.adminService.createUsers(params);
   }
 
-  @Patch(':id/updateUsers')
+  @Patch('/users/:id')
   updateUsers(@Param() user, @Body() params: UpdateUsers) {
     return this.adminService.updateUsers(user.id, params);
   }
 
 
+
+
+  
 
   @Get('getRoles')
   getRoles(@Query() params: GetRoles) {
